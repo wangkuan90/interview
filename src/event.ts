@@ -69,6 +69,9 @@ class ChildBus extends Bus {
     constructor() {
         super();
     }
+    private getLine(i: number) {
+        return new Array(i).fill('--').join('');
+    }
     public pushStack(type: string, name: string) {
         this.stack.push({
             type,
@@ -76,7 +79,12 @@ class ChildBus extends Bus {
         });
     }
     public printStack() {
-        console.log(this.stack);
+        let printStr = '';
+        for (let i = 0; i < this.stack.length; i++) {
+            let stack = this.stack[i];
+            printStr += `${this.getLine(i)}${stack.type}: ${stack.name}\n`;
+        }
+        console.log(printStr);
         return this.stack;
     }
 }
